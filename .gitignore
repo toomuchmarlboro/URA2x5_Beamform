@@ -1,0 +1,17 @@
+# Python caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+
+# Local editor/tool settings
+.claude/
+.vscode/
+.idea/
+
+# OS cruft
+Thumbs.db
+.DS_Store

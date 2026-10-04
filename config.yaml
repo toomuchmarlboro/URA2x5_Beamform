@@ -1,0 +1,34 @@
+# Shared parameters for the 2x5 URA panel (PT PAL array).
+#
+# URA2x5_Beamformed.ipynb (Track A, ideal baseline) reads `environment`, `array` and `design`.
+# A later realistic revision will add `track_b` and `limits`, as in the sibling BEAMFORM_LEN
+# project for the 9-element ring.
+
+environment:
+  c_water: 1500.0          # m/s. Ideal baseline: used as both truth and processor speed.
+
+array:
+  n_long: 5                # elements along the long axis (Y, horizontal) -> azimuth aperture
+  n_stack: 2               # stacked rows along Z (vertical)              -> coarse elevation
+  d_m: 0.83                # uniform element separation, both axes
+
+baffle:
+  # The panel is BACK-BAFFLED. The baffle does not change the array manifold -- front and
+  # back steering vectors remain identical -- it attenuates the back arrival before it
+  # reaches the elements, resolving the ambiguity at the input.
+  #
+  # PLACEHOLDER: 20 dB is a typical figure for a competent sonar baffle. Replace with the
+  # measured front-to-back rejection of the actual installation. Note that real baffles lose
+  # rejection at low frequency, so a frequency-flat value is optimistic at the band bottom.
+  front_to_back_db: 20.0
+  transition_deg: 12.0     # raised-cosine width straddling the rim at +/-90 deg
+
+design:
+  # 904 Hz is where d = lambda/2 for this 0.83 m spacing (c/2d = 903.6 Hz), i.e. the array's
+  # own spatial-sampling limit. The processing band stops just below it so the band is
+  # alias-free end to end.
+  f0_hz: 904.0
+  steer_el_deg: 0.0
+  steer_az_deg: 0.0        # 0 = broadside = the panel normal (+X)
+  phase_bits: 3            # carried over from the BEAMFORM_LEN testbench for comparability
+  band_hz: [100.0, 900.0]
