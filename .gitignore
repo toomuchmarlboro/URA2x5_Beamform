@@ -8,7 +8,6 @@ __pycache__/
 venv/
 
 # Local editor/tool settings
-.claude/
 .vscode/
 .idea/
 
